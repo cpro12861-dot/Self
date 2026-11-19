@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0D0D0F">
+<title>SELF Conscious</title>
+<style>
+:root{--bg:#0D0D0F;--card:#161619;--ink:#F4F4F5;--mut:#8C8C94;--ln:rgba(255,255,255,.07);--soft:rgba(255,255,255,.045);--seg:rgba(255,255,255,.1);--ring:rgba(255,255,255,.22);--glass:rgba(13,13,15,.72);--ac:#E8E4D9;--on:#151517;--r:16px;--pad:12px;--font:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--bg:#F6F5F2;--card:#fff;--ink:#18181B;--mut:#84848C;--ln:rgba(0,0,0,.08);--soft:rgba(0,0,0,.04);--seg:rgba(0,0,0,.07);--ring:rgba(0,0,0,.28);--glass:rgba(246,245,242,.78);color-scheme:light}}
+:root[data-theme="light"]{--bg:#F6F5F2;--card:#fff;--ink:#18181B;--mut:#84848C;--ln:rgba(0,0,0,.08);--soft:rgba(0,0,0,.04);--seg:rgba(0,0,0,.07);--ring:rgba(0,0,0,.28);--glass:rgba(246,245,242,.78);color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+#root{height:100%;display:flex;flex-direction:column;max-width:560px;margin:0 auto}
+main{flex:1;overflow-y:auto;padding:22px 18px 112px}
+h1{font-size:22px;font-weight:650;letter-spacing:-.02em;margin:0 0 14px}
+.ttl{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:400;font-size:27px;letter-spacing:-.01em;margin:0}
+h2{font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);margin:30px 4px 10px}
+.hd{display:flex;align-items:center;gap:6px;margin:14px 0 20px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:var(--r);padding:var(--pad) calc(var(--pad) + 2px);margin:10px 0}
+.row{display:flex;align-items:center;gap:8px}.sp{flex:1;min-width:0}.mut{color:var(--mut);font-size:13px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:var(--soft);border:1px solid var(--ln);border-radius:999px;padding:8px 15px;cursor:pointer;min-height:38px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+button:active{transform:scale(.97)}button:disabled{opacity:.35}
+button.p,button.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
+button.g{border:0;background:none;padding:6px 8px;min-height:32px;color:var(--mut)}
+input,select,textarea{background:var(--soft);border:1px solid var(--ln);border-radius:12px;padding:11px 12px;width:100%;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--ring)}
+textarea{min-height:84px;resize:vertical;line-height:1.5}
+input::placeholder,textarea::placeholder{color:var(--mut)}
+.tabs{display:flex;gap:4px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.tabs button{background:none;border:0;color:var(--mut);white-space:nowrap;padding:7px 13px;min-height:34px}
+.tabs button.on{background:var(--seg);color:var(--ink)}
+.seg{display:flex;gap:2px;background:var(--soft);border:1px solid var(--ln);border-radius:13px;padding:3px;margin-bottom:10px}
+.seg button{flex:1;border:0;background:none;border-radius:10px;min-height:34px;padding:4px 6px;color:var(--mut)}
+.seg button.on{background:var(--seg);color:var(--ink)}
+.sy{opacity:.65}
+.bar{display:flex;align-items:center;gap:2px;background:var(--soft);border:1px solid var(--ln);border-radius:14px;padding:3px 4px 3px 12px}
+.bar:focus-within{border-color:var(--ring)}
+.bar input{border:0;background:none;padding:9px 4px;flex:1;min-width:0}
+.ib{width:36px;height:36px;padding:0;border:0;background:none;border-radius:10px;color:var(--mut);display:inline-grid;place-items:center;min-height:0;position:relative;flex:none}
+.ib.on{color:var(--ink);background:var(--seg)}
+.bd{position:absolute;top:3px;right:3px;font-style:normal;font-size:10px;font-weight:700;color:var(--ac);line-height:1}
+.bd.dotb{width:5px;height:5px;border-radius:50%;background:var(--ac);top:6px;right:6px}
+.add{width:38px;height:38px;padding:0;border:0;border-radius:11px;background:var(--ac);color:var(--on);display:grid;place-items:center;min-height:0;flex:none}
+.dnv{display:flex;align-items:center;gap:2px;margin:4px 0 16px}
+.dl{flex:1;min-width:0;text-align:center}
+.dt1{font-size:17px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dt2{font-size:12px;color:var(--mut);margin-top:1px}
+.tb{min-height:30px;padding:3px 12px;font-size:13px;margin-left:4px}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;display:flex;background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);border-top:1px solid var(--ln);padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px));z-index:4}
+nav button{flex:1;border:0;border-radius:12px;background:none;flex-direction:column;gap:3px;font-size:10.5px;letter-spacing:.01em;color:var(--mut);padding:4px 0;min-height:0;position:relative}
+nav button.on{color:var(--ink);background:none;font-weight:600}
+nav button.on::after{content:"";position:absolute;bottom:-5px;width:4px;height:4px;border-radius:50%;background:var(--ac)}
+.ent{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--ln)}
+.ent:last-child{border:0}
+.bl{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ring);background:none;color:var(--mut);font-size:14px;line-height:1;display:grid;place-items:center;padding:0;min-height:0;cursor:pointer;flex:none;margin-top:1px;transition:background .18s,border-color .18s,color .18s,transform .12s}
+.bl:active{transform:scale(.84)}
+.done .bl{background:var(--ac);border-color:var(--ac);color:var(--on)}
+.done .tx{text-decoration:line-through;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.day{aspect-ratio:1;border-radius:12px;background:none;border:1px solid transparent;flex-direction:column;font-size:14px;padding:0;min-height:0;gap:0}
+.day.t{border-color:var(--ring);font-weight:700}.day.s{background:var(--ac);border-color:var(--ac);color:var(--on)}
+.dots{display:flex;gap:2px;height:6px;align-items:center;margin-top:2px}.dt,.de,.dn2{display:inline-block;flex:none}
+.dt{width:5px;height:5px;border-radius:50%;background:var(--ac)}.de{width:6px;height:6px;border-radius:50%;border:1.5px solid var(--ac)}.dn{width:7px;height:3px;border-radius:2px;background:var(--mut)}
+.dots .dn,.mut .dn{display:inline-block}
+.day.s .dt{background:var(--on)}.day.s .de{border-color:var(--on)}.day.s .dn{background:var(--on)}.day:disabled{opacity:.28}
+.mini .day{font-size:10px;border-radius:6px}.mini .dt{width:3px;height:3px;margin-top:1px}.grid.mini{gap:2px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;padding:2px 9px;border-radius:99px;border:1px solid var(--ln);color:var(--mut);background:none}
+.chip.r{color:#e5877f;border-color:rgba(229,135,127,.35)}
+.chip.sv::before{content:"";width:6px;height:6px;border-radius:50%;background:#7fbf9a}.chip.sv.r::before{background:#e5877f}
+.ban{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:12px;right:12px;max-width:536px;margin:0 auto;background:var(--card);border:1px solid var(--ring);color:var(--ink);padding:10px 12px;border-radius:14px;z-index:5;display:flex;gap:8px;align-items:center;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.ban button{background:var(--ac);color:var(--on);border:0;min-height:34px;padding:4px 14px}.ban button+button{background:var(--soft);color:var(--ink)}
+.sw{width:34px;height:34px;padding:0;border-radius:50%}
+.img{width:100%;border-radius:12px;margin-top:8px}
+.hb{width:30px;height:30px;padding:0;border-radius:10px;min-height:0;background:none;border:1.5px solid var(--ring);transition:background .18s,border-color .18s,transform .12s}
+.hb:active{transform:scale(.88)}.hb.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
+.tile{margin:0;padding:18px 16px;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:14px;font-size:15px;min-height:96px}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+main>div{animation:fi .18s ease-out}button,select{touch-action:manipulation;transition:background .15s,opacity .15s,color .15s}.ent .g{min-width:36px;min-height:36px}
+@media (prefers-reduced-motion:reduce){main>div{animation:none}*{transition:none!important}}
+</style></head>
+<body><div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script>
+const {useState,useEffect,useMemo,useRef}=React;const h=htm.bind(React.createElement);
+const KEY='selfconscious.v1',START='2026-11-18';
+const p2=n=>String(n).padStart(2,'0');
+const iso=d=>String(d.getFullYear()).padStart(4,'0')+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());
+const D=s=>{const[y,m,d]=s.split('-').map(Number),x=new Date(2000,0,1,12);x.setFullYear(y,m-1,d);return x};
+const add=(s,n)=>{const d=D(s);d.setDate(d.getDate()+n);return iso(d)};
+const addM=(s,n)=>{const d=D(s);d.setDate(1);d.setMonth(d.getMonth()+n);return iso(d)};
+const wk=s=>add(s,-((D(s).getDay()+6)%7));
+const todayS=()=>iso(new Date());
+const fmt=(s,o)=>D(s).toLocaleDateString(undefined,o);
+const uid=()=>Math.random().toString(36).slice(2,9);
+const dim=s=>{const x=D(s);x.setMonth(x.getMonth()+1,0);return x.getDate()};
+let JSTART=START;
+const DSYM={task:['•','Task'],done:['×','Completed task'],event:['○','Event'],note:['–','Note'],star:['★','Important'],pri:['!','Priority'],moved:['→','Migrated task'],future:['<','Scheduled for future']};
+const symOf=st=>{const o={};for(const k in DSYM)o[k]=((st.sym||{})[k]||'').trim()||DSYM[k][0];return o};
+let SYM=symOf({});
+const ym=s=>s.slice(0,s.lastIndexOf('-'));
+const upg=(x,raw)=>raw.accV===2?x:{...x,ac:'#E8E4D9',accV:2};
+const IC={search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',book:'<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',cal:'<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',tasks:'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',more:'<rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/>',target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',cam:'<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/>',note:'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/>',review:'<rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>',gear:'<path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/>',trash:'<path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',arrow:'<path d="M5 12h14M12 5l7 7-7 7"/>',plus:'<path d="M5 12h14M12 5v14"/>',flag:'<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/>',clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',tick:'<path d="M20 6 9 17l-5-5"/>',left:'<path d="m15 18-6-6 6-6"/>',right:'<path d="m9 18 6-6-6-6"/>'};
+function Ic({n,s=22}){return h`<svg width=${s} height=${s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML=${{__html:IC[n]}}/>`}
+const bul=e=>e.type==='task'?(e.done?SYM.done:SYM.task):e.type==='event'?(e.done?'●':SYM.event):SYM.note;
+const mst=s=>{const x=D(s);x.setDate(1);return iso(x)};
+function dayIndex(S){const m={},g=k=>m[k]||(m[k]={t:0,e:0,n:0});S.entries.forEach(e=>{const k=(e.type||'note')[0];if(k in{t:1,e:1,n:1})g(e.date)[k]++});S.mems.forEach(x=>g(x.date).n++);Object.keys(S.reviews).forEach(k=>{if(k.slice(0,2)==='d:'&&(((S.reviews[k]||{}).a||'')+((S.reviews[k]||{}).hl||'')).trim())g(k.slice(2)).n++});return m}
+function Dots({x}){return x?h`<span class="dots">${x.t>0&&h`<i class="dt"/>`}${x.e>0&&h`<i class="de"/>`}${x.n>0&&h`<i class="dn"/>`}</span>`:h`<span class="dots"/>`}
+const DEF={entries:[],habits:[],goals:[],mems:[],notes:[],reviews:{},set:{mode:'auto',ac:'#E8E4D9',accV:2,font:'sans',r:16,pad:12,remind:false,time:'20:00',start:START}};
+const FONTS={sans:'ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif',serif:'Georgia,"Times New Roman",serif',mono:'ui-monospace,Menlo,Consolas,monospace',round:'ui-rounded,"Nunito","Segoe UI",system-ui,sans-serif'};
+const BUL={task:'•',event:'○',note:'–'};
+
+const arr=a=>Array.isArray(a)?a.filter(x=>x&&typeof x==='object').map(x=>x.id?x:{...x,id:uid()}):[];
+const obj=o=>o&&typeof o==='object'&&!Array.isArray(o)?o:{};
+const fixE=e=>({...e,date:e.date||todayS(),cdate:e.cdate||e.date||todayS(),hist:Array.isArray(e.hist)&&e.hist.length?e.hist:[{t:e.created||null,d:e.cdate||e.date||todayS(),a:'created',approx:!e.created}]});
+function norm(j){j=obj(j);return{...DEF,...j,entries:arr(j.entries).map(fixE),habits:arr(j.habits).map(x=>({...x,days:obj(x.days)})),goals:arr(j.goals),mems:arr(j.mems),notes:arr(j.notes),reviews:obj(j.reviews),set:upg({...DEF.set,...obj(j.set)},obj(j.set))}}
+const cnt=s=>s.entries.length+s.habits.length+s.goals.length+s.mems.length+s.notes.length;
+function backup(S){try{localStorage.setItem(KEY+'.backup',JSON.stringify({at:Date.now(),data:S}));return true}catch(e){return false}}
+function getBackup(){try{return JSON.parse(localStorage.getItem(KEY+'.backup'))}catch(e){return null}}
+const mrg=(a,b)=>{const m=new Map(a.map(x=>[x.id,x]));b.forEach(x=>{if(!m.has(x.id))m.set(x.id,x)});return[...m.values()]};
+function mergeData(a,b){return{...a,entries:mrg(a.entries,b.entries),goals:mrg(a.goals,b.goals),mems:mrg(a.mems,b.mems),notes:mrg(a.notes,b.notes),habits:mrg(a.habits,b.habits).map(x=>{const o=b.habits.find(y=>y.id===x.id);return o?{...x,days:{...o.days,...x.days}}:x}),reviews:{...b.reviews,...a.reviews}}}
+async function exportData(S,done){const txt=JSON.stringify({app:'SELF Conscious',version:1,exportedAt:new Date().toISOString(),data:S},null,1),name='self-conscious-backup-'+todayS()+'.json';
+ try{const dl=window.claude&&await window.claude.use('downloads');if(dl){await dl.save({filename:name,data:txt});done&&done();return'Backup saved.'}}catch(e){if(e&&e.code==='declined')return'Export cancelled.'}
+ try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'application/json'}));a.download=name;a.click();done&&done();return'Backup download started.'}catch(e){}
+ try{await navigator.clipboard.writeText(txt);done&&done();return'Downloads are blocked here, so the backup was copied to your clipboard. Paste it into a notes app to keep it.'}catch(e){return'Export failed. Try again from the home-screen app.'}}
+function load(){let raw;try{raw=localStorage.getItem(KEY)}catch(e){return{state:DEF,note:'Browser storage is blocked, so changes will not be kept. Export backups often.'}}
+ if(!raw)return{state:DEF};
+ try{return{state:norm(JSON.parse(raw))}}catch(e){try{localStorage.setItem(KEY+'.corrupt',raw)}catch(_){}return{state:DEF,note:'Saved data could not be read. A raw copy was kept aside instead of being overwritten.'}}}
+function useStore(){
+ const first=useRef(null);if(!first.current)first.current=load();
+ const[S,setS]=useState(first.current.state),ref=useRef(S);
+ const[info,setInfo]=useState({ok:true,at:null,undo:null,note:first.current.note||''});
+ const up=fn=>{const prev=ref.current,next=typeof fn==='function'?fn(prev):fn;ref.current=next;setS(next);if(cnt(next)<cnt(prev))setInfo(i=>({...i,undo:prev}))};
+ useEffect(()=>{try{localStorage.setItem(KEY,JSON.stringify(S));setInfo(i=>({...i,ok:true,at:Date.now()}))}catch(e){setInfo(i=>({...i,ok:false}))}},[S]);
+ useEffect(()=>{const fl=()=>{if(document.visibilityState==='hidden')try{localStorage.setItem(KEY,JSON.stringify(ref.current))}catch(e){}};
+  const st=e=>{if(e.key===KEY&&e.newValue)try{const s=norm(JSON.parse(e.newValue));ref.current=s;setS(s)}catch(_){}};
+  document.addEventListener('visibilitychange',fl);window.addEventListener('pagehide',fl);window.addEventListener('storage',st);
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+  return()=>{document.removeEventListener('visibilitychange',fl);window.removeEventListener('pagehide',fl);window.removeEventListener('storage',st)}},[]);
+ const undo=()=>{if(info.undo){const p=info.undo;ref.current=p;setS(p);setInfo(i=>({...i,undo:null}))}};
+ return[S,up,info,undo,()=>setInfo(i=>({...i,undo:null,note:''}))]}
+
+function Nav({d,setD,unit,sub}){
+ const go=x=>setD(x<JSTART?JSTART:x);
+ const mv=n=>go(unit==='month'?addM(d,n):unit==='year'?addM(d,12*n):add(d,unit==='week'?7*n:n));
+ const pe=unit==='month'?add(mst(d),-1):unit==='year'?String(D(d).getFullYear()-1).padStart(4,'0')+'-12-31':unit==='week'?add(wk(d),-1):add(d,-1);
+ const label=unit==='month'?fmt(d,{month:'long',year:'numeric'}):unit==='year'?D(d).getFullYear():unit==='week'?fmt(wk(d),{month:'short',day:'numeric'})+' – '+fmt(add(wk(d),6),{month:'short',day:'numeric',year:'numeric'}):fmt(d,{weekday:'short',month:'short',day:'numeric'})+(D(d).getFullYear()!==new Date().getFullYear()?', '+D(d).getFullYear():'');
+ return h`<div class="dnv"><button class="ib" disabled=${pe<JSTART} onClick=${()=>mv(-1)} aria-label="Previous"><${Ic} n="left" s=${20}/></button><div class="dl"><div class="dt1">${label}</div>${sub&&h`<div class="dt2">${sub}</div>`}</div><button class="ib" onClick=${()=>mv(1)} aria-label="Next"><${Ic} n="right" s=${20}/></button><button class="tb" onClick=${()=>go(todayS())}>Today</button></div>`}
+
+function Tabs({v,set,items}){return h`<div class="tabs">${items.map(([k,l])=>h`<button key=${k} class=${v===k?'on':''} onClick=${()=>set(k)}>${l}</button>`)}</div>`}
+
+const EVL={created:'Created',done:'Completed',reopened:'Reopened',moved:'Moved',priority:'Priority changed',due:'Deadline changed',edited:'Edited'};
+const stamp=(a,n)=>({t:new Date().toISOString(),d:todayS(),a,...(n?{n}:{})});
+const fdt=s=>fmt(s,{month:'short',day:'numeric',year:'numeric'});
+const pn=n=>String(n).replace(/\d{4,}-\d\d-\d\d/g,m=>fmt(m,{month:'short',day:'numeric'}));
+function Entry({e,up,go,showDate}){
+ const[open,sO]=useState(false);
+ const ch=(o,a,n)=>up(s=>({...s,entries:s.entries.map(x=>x.id===e.id?{...x,...o,hist:a?[...(x.hist||[]),stamp(a,n)]:x.hist}:x)}));
+ const over=e.type==='task'&&!e.done&&e.due&&e.due<todayS(),hist=e.hist||[],mv=hist.filter(x=>x.a==='moved').length,cd=e.cdate||e.date,base=e.date>todayS()?e.date:todayS(),eom=iso(new Date(new Date().getFullYear(),new Date().getMonth()+1,0)),mvTo=x=>{if(x&&x>=JSTART&&x!==e.date)ch({date:x},'moved',e.date+' → '+x)},mb=(l,x)=>h`<button disabled=${x===e.date||x<JSTART} onClick=${()=>mvTo(x)}>${l}</button>`;
+ return h`<div class=${'ent '+(e.done?'done':'')} style=${{flexWrap:'wrap'}}>
+  <button class="bl" onClick=${()=>ch(e.done?{done:false,doneOn:null}:{done:true,doneOn:todayS()},e.done?'reopened':'done')} aria-label="Toggle done">${bul(e)}</button>
+  <div class="sp" style=${{cursor:'pointer'}} onClick=${()=>sO(!open)}><div class="tx">${(e.star||e.pri)?h`<b style=${{color:'var(--ac)'}}>${e.star?SYM.star:''}${SYM.pri.repeat(e.pri)} </b>`:''}${e.text}</div>
+   <div class="row" style=${{flexWrap:'wrap',marginTop:3}}>
+    ${showDate&&go&&h`<span class="chip" onClick=${v=>{v.stopPropagation();go(e.date)}}>${fmt(e.date,{month:'short',day:'numeric'})}</span>`}
+    ${cd!==e.date&&h`<span class="chip">created ${fmt(cd,{month:'short',day:'numeric'})}</span>`}${mv>0&&h`<span class="chip">${SYM.moved} moved ×${mv}</span>`}${e.type==='task'&&!e.done&&e.date>eom&&h`<span class="chip">${SYM.future} future</span>`}${e.doneOn&&h`<span class="chip">done ${fmt(e.doneOn,{month:'short',day:'numeric'})}</span>`}
+    ${e.due&&h`<span class=${'chip '+(over?'r':'')}>due ${fmt(e.due,{month:'short',day:'numeric'})}</span>`}</div></div>
+  <button class="g" title="Cycle priority" onClick=${()=>{const n=(e.pri+1)%4;ch({pri:n},'priority',e.pri+' → '+n)}}>${SYM.pri}</button>
+  ${e.type==='task'&&!e.done&&h`<button class="g" title="Migrate to tomorrow" onClick=${()=>{const n=add(e.date>todayS()?e.date:todayS(),1);ch({date:n},'moved',e.date+' → '+n)}}><${Ic} n="arrow" s=${17}/></button>`}
+  <button class="g" title="Delete" onClick=${()=>up(s=>({...s,entries:s.entries.filter(x=>x.id!==e.id)}))}><${Ic} n="trash" s=${17}/></button>
+  ${open&&h`<div style=${{flexBasis:'100%',paddingLeft:34}}>
+   <input key=${e.text} defaultValue=${e.text} onBlur=${v=>{const t=v.target.value.trim();if(t&&t!==e.text)ch({text:t},'edited','was: '+e.text)}}/>
+   <div class="row" style=${{margin:'8px 0'}}><label class="mut sp">Date<input type="date" min=${JSTART} value=${e.date} onChange=${v=>{const x=v.target.value;if(x&&x>=JSTART&&x!==e.date)ch({date:x},'moved',e.date+' → '+x)}}/></label><label class="mut sp">Deadline<input type="date" value=${e.due||''} onChange=${v=>{const x=v.target.value;if(x!==(e.due||''))ch({due:x},'due',x||'removed')}}/></label></div>
+   <div class="row" style=${{flexWrap:'wrap',marginBottom:8}}><button class=${e.star?'on':''} onClick=${()=>ch({star:!e.star})}>${SYM.star} Important</button>${mb(SYM.moved+' Day before',add(e.date,-1))}${mb(SYM.moved+' Day after',add(e.date,1))}${mb(SYM.moved+' Today',todayS())}${mb(SYM.moved+' Next week',add(wk(base),7))}${mb(SYM.moved+' Next month',mst(addM(base,1)))}</div>
+   <div class="mut"><b>History</b></div>
+   ${[...hist].reverse().map((x,i)=>h`<div class="mut" key=${i}>${fdt(x.d)}${x.t&&!x.approx?' '+new Date(x.t).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):''}: ${EVL[x.a]||x.a}${x.n?' ('+pn(x.n)+')':''}${x.approx?' (first log date)':''}</div>`)}</div>`}</div>`}
+
+function Composer({date,up,future}){
+ const[t,sT]=useState(''),[ty,sTy]=useState('task'),[pri,sP]=useState(0),[due,sD]=useState(''),[dt,sDt]=useState(date),[m,sM]=useState(''),[sh,sSh]=useState(false);
+ useEffect(()=>sDt(date),[date]);
+ const go=()=>{const tx=t.trim(),tg=future?dt:date;if(!tx)return;let dup=false;up(s=>{dup=s.entries.some(x=>x.type===ty&&x.date===tg&&x.text.trim().toLowerCase()===tx.toLowerCase());return dup?s:{...s,entries:[...s.entries,{id:uid(),date:tg,type:ty,text:tx,done:false,pri,due,cdate:todayS(),created:new Date().toISOString(),hist:[stamp('created')]}]}});if(dup){sM('That entry is already logged on this date.');return}sM('');sT('');sD('');sP(0);sSh(false)};
+ return h`<div class="card"><div class="seg">${['task','event','note'].map(k=>h`<button key=${k} class=${ty===k?'on':''} onClick=${()=>sTy(k)}><span class="sy">${bul({type:k})}</span>${k[0].toUpperCase()+k.slice(1)}</button>`)}</div>
+  <div class="bar"><input value=${t} placeholder="Add to your log…" onInput=${e=>sT(e.target.value)} onKeyDown=${e=>e.key==='Enter'&&go()}/>
+   <button class=${'ib'+(pri?' on':'')} aria-label="Priority" title="Priority" onClick=${()=>sP((pri+1)%4)}><${Ic} n="flag" s=${18}/>${pri>0&&h`<i class="bd">${SYM.pri.repeat(pri)}</i>`}</button>
+   <button class=${'ib'+((sh||due)?' on':'')} aria-label="Deadline" title="Deadline" onClick=${()=>sSh(!sh)}><${Ic} n="clock" s=${18}/>${due&&h`<i class="bd dotb"/>`}</button>
+   <button class="add" aria-label="Add" onClick=${go}><${Ic} n="plus" s=${19}/></button></div>
+  ${m&&h`<div class="mut" style=${{marginTop:8}}>${m}</div>`}
+  ${(sh||future)&&h`<div class="row" style=${{marginTop:10}}>${future&&h`<label class="mut sp">Date<input type="date" value=${dt} onChange=${e=>sDt(e.target.value||date)}/></label>`}${sh&&h`<label class="mut sp">Deadline<input type="date" value=${due} onChange=${e=>sD(e.target.value)}/></label>`}</div>`}</div>`}
+
+function Daily({S,up,d,setD}){
+ const list=S.entries.filter(e=>e.date===d);const hb=S.habits,un=list.filter(e=>e.type==='task'&&!e.done);
+ const n=D(d)-D(S.set.start);const dayN=Math.floor(n/864e5)+1;
+ return h`<div><${Nav} d=${d} setD=${setD} unit="day" sub=${dayN>0?'Day '+dayN:'Before your journal began'}/>
+  <${Composer} date=${d} up=${up}/>
+  <div class="card">${list.length?list.sort((a,b)=>b.pri-a.pri).map(e=>h`<${Entry} key=${e.id} e=${e} up=${up}/>`):h`<div class="mut">Nothing logged. Add a task, event or note above.</div>`}</div>${un.length>0&&h`<${Bulk} un=${un} up=${up} d=${d}/>`}
+  ${hb.length>0&&h`<h2>Habits</h2><div class="card">${hb.map(x=>h`<div class="row" key=${x.id} style=${{padding:'4px 0'}}><span class="sp">${x.name}</span><button class=${'hb '+(x.days[d]?'on':'')} onClick=${()=>up(s=>({...s,habits:s.habits.map(y=>y.id===x.id?{...y,days:{...y.days,[d]:!y.days[d]}}:y)}))}>${x.days[d]&&h`<${Ic} n="tick" s=${16}/>`}</button></div>`)}</div>`}
+  <${DayExtras} S=${S} up=${up} d=${d}/><${Key} S=${S}/></div>`}
+
+function DayExtras({S,up,d}){const k='d:'+d,r=S.reviews[k]||{},set=(f,v)=>up(s=>({...s,reviews:{...s.reviews,[k]:{...(s.reviews[k]||{}),[f]:v}}}));
+ return h`<h2>Highlight and reflection</h2><div class="card"><input placeholder="Highlight of the day" value=${r.hl||''} onInput=${e=>set('hl',e.target.value)}/><textarea style=${{marginTop:8}} placeholder="How did today go?" value=${r.a||''} onInput=${e=>set('a',e.target.value)}/></div>`}
+function Key({S}){return h`<div class="mut" style=${{marginTop:14,lineHeight:2}}>${Object.keys(DSYM).map(k=>h`<span class="chip" key=${k} style=${{marginRight:6}}>${SYM[k]} ${(S.set.symm||{})[k]??DSYM[k][1]}</span>`)}</div>`}
+function Bulk({un,up,d}){const[w,sW]=useState('tomorrow'),[c,sC]=useState(''),base=d>todayS()?d:todayS(),x={tomorrow:add(base,1),week:add(wk(base),7),month:mst(addM(base,1)),custom:c}[w];
+ return h`<div class="card"><div class="mut">Migrate ${un.length} unfinished ${un.length===1?'task':'tasks'}</div><div class="row" style=${{marginTop:8,flexWrap:'wrap'}}><select value=${w} onChange=${e=>sW(e.target.value)} style=${{width:'auto',flex:1}}><option value="tomorrow">Next day</option><option value="week">Next week</option><option value="month">Next month</option><option value="custom">Pick a date</option></select>${w==='custom'&&h`<input type="date" min=${JSTART} value=${c} onChange=${e=>sC(e.target.value)} style=${{width:'auto'}}/>`}<button class="p" disabled=${!x||x<JSTART||x===d} onClick=${()=>up(s=>({...s,entries:s.entries.map(e=>un.some(u=>u.id===e.id)&&e.date!==x?{...e,date:x,hist:[...(e.hist||[]),stamp('moved',e.date+' → '+x)]}:e)}))}>${SYM.moved} Migrate</button></div></div>`}
+
+function MonthGrid({m,ix,d,pick,mini}){const f=mst(m),off=(D(f).getDay()+6)%7,n=dim(f),t=todayS();
+ const cells=[...Array(off).fill(null),...Array.from({length:n},(_,i)=>add(f,i))];
+ return h`<div><div class=${'grid mut'+(mini?' mini':'')} style=${mini?{fontSize:9}:{}}>${'MTWTFSS'.split('').map((c,i)=>h`<div key=${i}>${c}</div>`)}</div>
+ <div class=${'grid'+(mini?' mini':'')} style=${{marginTop:4}}>${cells.map((c,i)=>c?h`<button key=${c} disabled=${c<JSTART} aria-label=${c} class=${'day '+(c===t?'t ':'')+(c===d?'s':'')} onClick=${()=>pick(c)}>${+c.slice(-2)}${mini?(ix[c]?h`<i class="dt"/>`:''):h`<${Dots} x=${ix[c]}/>`}</button>`:h`<div key=${i}/>`)}</div></div>`}
+
+function Month({S,up,d,setD,setDay}){const ix=useMemo(()=>dayIndex(S),[S]),f=mst(d),last=add(f,dim(f)-1);
+ const l=S.entries.filter(e=>e.date>=f&&e.date<=last).sort((a,b)=>a.date.localeCompare(b.date)||b.pri-a.pri),days=[...new Set(l.map(e=>e.date))],un=l.filter(e=>e.type==='task'&&!e.done),imp=l.filter(e=>e.star||e.type==='event');
+ return h`<div><${Nav} d=${d} setD=${setD} unit="month"/><${MonthGrid} m=${f} ix=${ix} d=${d} pick=${setDay}/>
+  <p class="mut"><i class="dt"/> task  <i class="de"/> event  <i class="dn"/> note or review. Tap a day to open its journal.</p>
+  ${un.length>0&&h`<h2>Unfinished tasks (${un.length})</h2><div class="card">${un.map(e=>h`<${Entry} key=${e.id} e=${e} up=${up} showDate=${true} go=${setDay}/>`)}</div>`}${imp.length>0&&h`<h2>Events and important dates</h2><div class="card">${imp.map(e=>h`<${Entry} key=${e.id} e=${e} up=${up} showDate=${true} go=${setDay}/>`)}</div>`}
+  <h2>This month</h2>${days.length?days.map(x=>h`<div class="card" key=${x}><div class="row"><b class="sp">${fmt(x,{weekday:'short',month:'short',day:'numeric'})}</b><button class="g" onClick=${()=>setDay(x)}>Open</button></div>${l.filter(e=>e.date===x).map(e=>h`<${Entry} key=${e.id} e=${e} up=${up}/>`)}</div>`):h`<div class="mut">No entries this month.</div>`}
+  <${Goals} S=${S} up=${up} scope="month" d=${d} compact=${true}/><${Review} S=${S} up=${up} scope="month" d=${d}/></div>`}
+
+function Week({S,up,d,setD,setDay}){const w=wk(d),ix=useMemo(()=>dayIndex(S),[S]),t=todayS(),pr=S.entries.filter(e=>e.date>=w&&e.date<=add(w,6)&&!e.done&&(e.pri>0||e.star));
+ return h`<div><${Nav} d=${d} setD=${setD} unit="week"/>
+  <div class="grid">${Array.from({length:7},(_,i)=>add(w,i)).map(x=>h`<button key=${x} disabled=${x<JSTART} class=${'day '+(x===t?'t ':'')+(x===d?'s':'')} style=${{aspectRatio:'auto',padding:'6px 0'}} onClick=${()=>setDay(x)}><span style=${{fontSize:11,opacity:.7}}>${fmt(x,{weekday:'short'})}</span>${+x.slice(-2)}<${Dots} x=${ix[x]}/></button>`)}</div>
+  ${pr.length>0&&h`<h2>Priorities this week</h2><div class="card">${pr.map(e=>h`<${Entry} key=${e.id} e=${e} up=${up} showDate=${true} go=${setDay}/>`)}</div>`}
+  ${Array.from({length:7},(_,i)=>add(w,i)).map(x=>{const l=S.entries.filter(e=>e.date===x);
+  return h`<div class="card" key=${x} style=${x===t?{borderColor:'var(--ac)'}:{}}><div class="row"><b class="sp" onClick=${()=>setDay(x)}>${fmt(x,{weekday:'short',month:'short',day:'numeric'})}</b><button class="g" onClick=${()=>setDay(x)}>Open</button></div>
+  ${l.length?l.map(e=>h`<${Entry} key=${e.id} e=${e} up=${up}/>`):h`<div class="mut">—</div>`}</div>`})}
+  <${Goals} S=${S} up=${up} scope="week" d=${d} compact=${true}/><${Review} S=${S} up=${up} scope="week" d=${d}/></div>`}
+
+function Future({S,up,d,setDay}){const y0=D(JSTART).getFullYear(),ty=Math.max(D(todayS()).getFullYear(),y0),[fy,sFy]=useState(ty),[fm,sFm]=useState(0);
+ const ms=Array.from({length:12},(_,i)=>String(fy).padStart(4,'0')+'-'+p2(i+1)+'-01'),sel=ms[fm],jump=e=>{const v=Math.floor(+e.target.value);if(v>=y0&&v<=275000)sFy(v)};
+ return h`<div><h2>Future log</h2><div class="row"><button disabled=${fy<=y0} onClick=${()=>sFy(fy-1)}>‹</button><input type="number" key=${fy} defaultValue=${fy} min=${y0} onBlur=${jump} onKeyDown=${e=>e.key==='Enter'&&jump(e)} style=${{textAlign:'center'}}/><button onClick=${()=>sFy(fy+1)}>›</button><button onClick=${()=>sFy(ty)}>This year</button></div>
+ <label class="mut">Plan for month<select value=${fm} onChange=${e=>sFm(+e.target.value)}>${ms.map((m,i)=>h`<option key=${m} value=${i}>${fmt(m,{month:'long'})} ${fy}</option>`)}</select></label>
+ <${Composer} date=${sel<JSTART?JSTART:sel} up=${up} future=${true}/>
+ <div class="mut">Goals for ${fmt(sel,{month:'long',year:'numeric'})}</div><${Goals} S=${S} up=${up} scope="month" d=${sel}/><div class="mut">Goals for ${fy}</div><${Goals} S=${S} up=${up} scope="year" d=${ms[0]}/>
+ ${ms.map(m=>{const l=S.entries.filter(e=>ym(e.date)===ym(m)).sort((a,b)=>a.date.localeCompare(b.date));
+  return h`<div class="card" key=${m}><b>${fmt(m,{month:'long',year:'numeric'})}</b> <span class="mut">${l.length} planned</span>${l.map(e=>h`<${Entry} key=${e.id} e=${e} up=${up} showDate=${true} go=${setDay}/>`)}</div>`})}</div>`}
+
+function Year({S,up,d,setD,setDay,setMonth}){const y=D(d).getFullYear(),y0=D(JSTART).getFullYear(),ix=useMemo(()=>dayIndex(S),[S]);
+ const jump=e=>{const v=Math.floor(+e.target.value);if(v>=y0&&v<=275000)setD(v>y0?String(v).padStart(4,'0')+'-01-01':JSTART)};
+ return h`<div><${Nav} d=${d} setD=${setD} unit="year"/>
+  <div class="row"><span class="mut sp">Jump to year (${y0} onward, no upper limit)</span><input type="number" style=${{width:110}} key=${y} defaultValue=${y} min=${y0} onBlur=${jump} onKeyDown=${e=>e.key==='Enter'&&jump(e)}/></div>
+  <div class="grid" style=${{gridTemplateColumns:'1fr 1fr',gap:10,marginTop:8}}>${Array.from({length:12},(_,i)=>String(y).padStart(4,'0')+'-'+p2(i+1)+'-01').map(m=>h`<div class="card" key=${m} style=${{margin:0,padding:8}}><button class="g" style=${{fontWeight:700}} onClick=${()=>setMonth(m)}>${fmt(m,{month:'long'})}</button><${MonthGrid} m=${m} ix=${ix} d=${d} pick=${setDay} mini=${true}/></div>`)}</div>
+  <${Goals} S=${S} up=${up} scope="year" d=${d} compact=${true}/><${Review} S=${S} up=${up} scope="year" d=${d}/></div>`}
+
+function Log({S,up,d,setD,setDay,lt}){const[v,sV]=useState(lt||'month');
+ return h`<div><h1>Calendar</h1><${Tabs} v=${v} set=${sV} items=${[['year','Year'],['month','Month'],['week','Week'],['day','Day'],['future','Future']]}/>
+ ${v!=='future'&&h`<label class="row mut"><span class="sp">Go to date</span><input type="date" style=${{width:170}} min=${JSTART} value=${d} onChange=${e=>e.target.value&&setD(e.target.value<JSTART?JSTART:e.target.value)}/></label>`}
+ ${v==='year'&&h`<${Year} S=${S} up=${up} d=${d} setD=${setD} setDay=${setDay} setMonth=${m=>{setD(m<JSTART?JSTART:m);sV('month')}}/>`}${v==='month'&&h`<${Month} S=${S} up=${up} d=${d} setD=${setD} setDay=${setDay}/>`}
+ ${v==='week'&&h`<${Week} S=${S} up=${up} d=${d} setD=${setD} setDay=${setDay}/>`}${v==='day'&&h`<${Daily} S=${S} up=${up} d=${d} setD=${setD}/>`}
+ ${v==='future'&&h`<${Future} S=${S} up=${up} d=${d} setDay=${setDay}/>`}</div>`}
+
+function Tasks({S,up,setDay}){const[f,sF]=useState('open'),t=todayS();
+ let l=S.entries.filter(e=>e.type==='task');
+ if(f==='open')l=l.filter(e=>!e.done);if(f==='over')l=l.filter(e=>!e.done&&e.due&&e.due<t);if(f==='today')l=l.filter(e=>!e.done&&(e.date===t||e.due===t));if(f==='pri')l=l.filter(e=>!e.done&&e.pri>0);if(f==='done')l=l.filter(e=>e.done);
+ l=f==='hist'?[...l].sort((a,b)=>(b.cdate||b.date).localeCompare(a.cdate||a.date)):[...l].sort((a,b)=>b.pri-a.pri||(a.due||'9').localeCompare(b.due||'9'));
+ const gr=f==='hist'?[...new Set(l.map(e=>e.cdate||e.date))]:[''];
+ return h`<div><h1>Tasks</h1><${Tabs} v=${f} set=${sF} items=${[['open','Open'],['today','Today'],['over','Overdue'],['pri','Priority'],['done','Done'],['hist','History']]}/>
+ ${f==='hist'&&h`<div class="mut">Every task by the date it was created. Tap a task for its full history.</div>`}
+ ${l.length?gr.map(g=>h`<div class="card" key=${g}>${g&&h`<b>Created ${fdt(g)}</b>`}${l.filter(e=>!g||(e.cdate||e.date)===g).map(e=>h`<${Entry} key=${e.id} e=${e} up=${up} showDate=${true} go=${setDay}/>`)}</div>`):h`<div class="card mut">No tasks here. Add tasks from the Today tab.</div>`}</div>`}
+
+function streak(x){let n=0,d=todayS();if(!x.days[d])d=add(d,-1);while(x.days[d]){n++;d=add(d,-1)}return n}
+function Habits({S,up}){const[n,sN]=useState('');const t=todayS(),days=Array.from({length:7},(_,i)=>add(t,i-6));
+ const tg=(id,d)=>up(s=>({...s,habits:s.habits.map(y=>y.id===id?{...y,days:{...y.days,[d]:!y.days[d]}}:y)}));
+ return h`<div><h1>Habits</h1><div class="card row"><input value=${n} placeholder="New habit" onInput=${e=>sN(e.target.value)}/><button class="p" onClick=${()=>{if(n.trim()){up(s=>({...s,habits:[...s.habits,{id:uid(),name:n.trim(),days:{}}]}));sN('')}}}>Add</button></div>
+ ${S.habits.map(x=>h`<div class="card" key=${x.id}><div class="row"><b class="sp">${x.name}</b><span class="chip"><${Ic} n="flame" s=${12}/> ${streak(x)} day streak</span><button class="g" onClick=${()=>up(s=>({...s,habits:s.habits.filter(y=>y.id!==x.id)}))}><${Ic} n="trash" s=${17}/></button></div>
+  <div class="row" style=${{marginTop:8,justifyContent:'space-between'}}>${days.map(d=>h`<div key=${d} style=${{textAlign:'center'}}><div class="mut">${fmt(d,{weekday:'narrow'})}</div><button class=${'hb '+(x.days[d]?'on':'')} onClick=${()=>tg(x.id,d)}>${x.days[d]&&h`<${Ic} n="tick" s=${16}/>`}</button></div>`)}</div></div>`)}
+ ${!S.habits.length&&h`<div class="mut">Add a habit to start a streak.</div>`}</div>`}
+
+function pkey(scope,d){return scope==='day'?d:scope==='year'?String(D(d).getFullYear()):scope==='month'?d.slice(0,7):wk(d)}
+function Goals({S,up,scope,d,compact}){const[t,sT]=useState('');const k=pkey(scope,d);
+ const l=S.goals.filter(g=>g.scope===scope&&g.key===k);
+ return h`<div><h2>${scope[0].toUpperCase()+scope.slice(1)} goals</h2><div class="card"><div class="row"><input value=${t} placeholder=${'Add a '+scope+' goal'} onInput=${e=>sT(e.target.value)}/><button class="p" onClick=${()=>{if(t.trim()){up(s=>({...s,goals:[...s.goals,{id:uid(),scope,key:k,text:t.trim(),done:false}]}));sT('')}}}>Add</button></div>
+ ${l.map(g=>h`<div class=${'ent '+(g.done?'done':'')} key=${g.id}><button class="bl" onClick=${()=>up(s=>({...s,goals:s.goals.map(x=>x.id===g.id?{...x,done:!x.done}:x)}))}>${g.done?'●':'○'}</button><div class="sp tx">${g.text}</div><button class="g" onClick=${()=>up(s=>({...s,goals:s.goals.filter(x=>x.id!==g.id)}))}><${Ic} n="trash" s=${17}/></button></div>`)}</div></div>`}
+
+function GoalsPage({S,up,d,setD}){const[v,sV]=useState('year');
+ return h`<div><h1>Goals</h1><${Tabs} v=${v} set=${sV} items=${[['year','Yearly'],['month','Monthly'],['week','Weekly']]}/><${Nav} d=${d} setD=${setD} unit=${v==='year'?'year':v}/><${Goals} S=${S} up=${up} scope=${v} d=${d}/></div>`}
+
+function Review({S,up,scope,d}){const k=scope[0]+':'+pkey(scope,scope==='day'?d:d),r=S.reviews[k]||{};
+ const q=[['a','What went well?'],['b','What was hard?'],['c','What will I change?']];
+ return h`<div><h2>${scope[0].toUpperCase()+scope.slice(1)} review</h2><div class="card">${q.map(([f,l])=>h`<label class="mut" key=${f}>${l}<textarea value=${r[f]||''} onInput=${e=>up(s=>({...s,reviews:{...s.reviews,[k]:{...r,[f]:e.target.value}}}))}/></label>`)}</div></div>`}
+function ReviewPage({S,up,d,setD}){const[v,sV]=useState('week');
+ return h`<div><h1>Reviews</h1><${Tabs} v=${v} set=${sV} items=${[['day','Daily'],['week','Weekly'],['month','Monthly']]}/><${Nav} d=${d} setD=${setD} unit=${v}/><${Review} S=${S} up=${up} scope=${v} d=${d}/></div>`}
+
+function shrink(f,cb){const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const s=Math.min(1,700/i.width),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.7))};i.src=r.result};r.readAsDataURL(f)}
+function Memories({S,up,d}){const[t,sT]=useState(''),[img,sI]=useState(''),[hl,sH]=useState(false);
+ const l=[...S.mems].sort((a,b)=>b.date.localeCompare(a.date));
+ return h`<div><h1>Memories</h1><div class="card"><textarea placeholder=${'Highlight of '+fmt(d,{month:'short',day:'numeric'})} value=${t} onInput=${e=>sT(e.target.value)}/>
+ ${img&&h`<img class="img" src=${img}/>`}
+ <div class="row" style=${{marginTop:8}}><label class="chip" style=${{padding:'9px 14px',cursor:'pointer'}}><${Ic} n="cam" s=${16}/> Photo<input type="file" accept="image/*" hidden onChange=${e=>e.target.files[0]&&shrink(e.target.files[0],sI)}/></label>
+ <button class=${hl?'on':''} onClick=${()=>sH(!hl)}>★ Highlight</button><span class="sp"/><button class="p" onClick=${()=>{if(t.trim()||img){up(s=>({...s,mems:[...s.mems,{id:uid(),date:d,text:t.trim(),img,star:hl}]}));sT('');sI('');sH(false)}}}>Save</button></div></div>
+ ${l.map(m=>h`<div class="card" key=${m.id}><div class="row"><b class="sp">${m.star?'★ ':''}${fmt(m.date,{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</b><button class="g" onClick=${()=>up(s=>({...s,mems:s.mems.filter(x=>x.id!==m.id)}))}><${Ic} n="trash" s=${17}/></button></div><div>${m.text}</div>${m.img&&h`<img class="img" src=${m.img}/>`}</div>`)}
+ ${!l.length&&h`<div class="mut">Save a photo or a line about a day you want to keep.</div>`}</div>`}
+
+function Notes({S,up}){const[open,sO]=useState(null),[q,sQ]=useState('');
+ const mk=()=>{const n={id:uid(),title:'Untitled',body:'',col:'General'};up(s=>({...s,notes:[n,...s.notes]}));sO(n.id)};
+ const n=S.notes.find(x=>x.id===open);const ch=o=>up(s=>({...s,notes:s.notes.map(x=>x.id===open?{...x,...o}:x)}));
+ if(n)return h`<div><button onClick=${()=>sO(null)}>‹ Back</button><div class="card"><input value=${n.title} onInput=${e=>ch({title:e.target.value})} style=${{fontWeight:700}}/>
+  <input style=${{marginTop:8}} value=${n.col} placeholder="Collection" onInput=${e=>ch({col:e.target.value})}/><textarea style=${{marginTop:8,minHeight:260}} value=${n.body} onInput=${e=>ch({body:e.target.value})}/>
+  <button style=${{marginTop:8}} onClick=${()=>{up(s=>({...s,notes:s.notes.filter(x=>x.id!==open)}));sO(null)}}>Delete note</button></div></div>`;
+ const cols=[...new Set(S.notes.map(x=>x.col))];const ql=q.toLowerCase();
+ return h`<div><h1>Notes</h1><div class="row"><input placeholder="Search" value=${q} onInput=${e=>sQ(e.target.value)}/><button class="p" onClick=${mk}>New</button></div>
+ ${cols.map(c=>h`<div key=${c}><h2>${c}</h2><div class="card">${S.notes.filter(x=>x.col===c&&(x.title+x.body).toLowerCase().includes(ql)).map(x=>h`<div class="ent" key=${x.id} onClick=${()=>sO(x.id)} style=${{cursor:'pointer'}}><div class="sp"><b>${x.title}</b><div class="mut">${x.body.slice(0,60)}</div></div>›</div>`)}</div></div>`)}
+ ${!S.notes.length&&h`<p class="mut">Create notes and group them into collections.</p>`}</div>`}
+
+function Settings({S,up,info}){const s=S.set,ch=o=>up(x=>({...x,set:{...x.set,...o}}));const fr=useRef();
+ const[msg,setMsg]=useState(''),[pers,setPers]=useState(null),[paste,setPaste]=useState(''),mode=useRef('replace'),bk=getBackup();
+ useEffect(()=>{try{navigator.storage.persisted().then(setPers)}catch(e){}},[]);
+ const ex=async()=>setMsg(await exportData(S,()=>ch({lastExport:Date.now()})));
+ const applyImport=txt=>{try{const j=JSON.parse(txt),raw=j&&j.data||j;if(!raw||!Array.isArray(raw.entries))throw 0;const d=norm(raw),mg=mode.current==='merge';
+  if(!confirm((mg?'Merge in ':'Replace everything with ')+d.entries.length+' entries, '+d.habits.length+' habits and '+d.notes.length+' notes? Your current data is backed up first.'))return;
+  backup(S);up(mg?mergeData(S,d):d);setMsg('Import complete. Use Undo or Restore backup to go back.')}catch(e){setMsg('That is not a valid SELF Conscious backup. Nothing was changed.')}};
+ const rem=async()=>{if(!s.remind&&'Notification'in window)try{await Notification.requestPermission()}catch(e){}ch({remind:!s.remind})};
+ return h`<div><h1>Settings</h1>
+ <h2>Appearance</h2><div class="card"><div class="mut">Mode</div><${Tabs} v=${s.mode} set=${v=>ch({mode:v})} items=${[['auto','Auto'],['light','Light'],['dark','Dark']]}/>
+ <div class="mut">Accent color</div><div class="row" style=${{flexWrap:'wrap',margin:'6px 0'}}>${['#E8E4D9','#C9B79C','#9FB3A5','#9AA7C0','#C7A0A6','#B7A8D0'].map(c=>h`<button key=${c} class="sw" style=${{background:c,outline:s.ac===c?'3px solid var(--ink)':'none'}} onClick=${()=>ch({ac:c})} aria-label=${c}/>`)}<input type="color" value=${s.ac} onInput=${e=>ch({ac:e.target.value})} style=${{width:44,padding:2,height:34}}/></div>
+ <div class="mut">Font</div><${Tabs} v=${s.font} set=${v=>ch({font:v})} items=${[['sans','Sans'],['serif','Serif'],['mono','Mono'],['round','Round']]}/>
+ <div class="mut">Layout</div><${Tabs} v=${s.pad+'-'+s.r} set=${v=>{const[a,b]=v.split('-');ch({pad:+a,r:+b})}} items=${[['8-8','Compact'],['12-16','Cozy'],['18-26','Spacious']]}/></div>
+ <h2>Rapid logging key</h2><div class="card">${Object.keys(DSYM).map(k=>h`<div class="row" key=${k} style=${{marginBottom:6}}><input style=${{width:56,textAlign:'center'}} maxLength="2" value=${(s.sym||{})[k]??DSYM[k][0]} onInput=${e=>ch({sym:{...(s.sym||{}),[k]:e.target.value.slice(0,2)}})}/><input value=${(s.symm||{})[k]??DSYM[k][1]} onInput=${e=>ch({symm:{...(s.symm||{}),[k]:e.target.value}})}/></div>`)}<button onClick=${()=>ch({sym:{},symm:{}})}>Reset symbols</button><p class="mut">Symbols show on every entry. An empty symbol falls back to its default.</p></div>
+ <h2>Reminders</h2><div class="card"><div class="row"><span class="sp">Daily reminder to journal</span><button class=${s.remind?'on':''} onClick=${rem}>${s.remind?'On':'Off'}</button></div>
+ <div class="row" style=${{marginTop:8}}><span class="sp mut">Time</span><input type="time" style=${{width:130}} value=${s.time} onChange=${e=>ch({time:e.target.value})}/></div><p class="mut">Reminders fire while the app is open or installed to your home screen.</p></div>
+ <h2>Journal</h2><div class="card"><label class="mut">Journal start date<input type="date" value=${s.start} onChange=${e=>e.target.value&&ch({start:e.target.value})}/></label></div>
+ <h2>Data</h2><div class="card row" style=${{flexWrap:'wrap'}}><button class="p" onClick=${ex}>Export backup</button><button onClick=${()=>{mode.current='replace';fr.current.click()}}>Import (replace)</button><button onClick=${()=>{mode.current='merge';fr.current.click()}}>Import (merge)</button><input ref=${fr} type="file" accept=".json,application/json" hidden onChange=${e=>{const f=e.target.files[0];if(f){const r=new FileReader();r.onload=()=>applyImport(r.result);r.readAsText(f)}e.target.value=''}}/>
+ <button onClick=${()=>{if(confirm('Erase all journal data? A backup is kept and you can undo.')){backup(S);up(DEF)}}}>Erase all</button></div>
+ ${msg&&h`<p class="mut">${msg}</p>`}
+ <div class="card"><textarea placeholder="Or paste backup text here to import" value=${paste} onInput=${e=>setPaste(e.target.value)}/><div class="row" style=${{marginTop:8,flexWrap:'wrap'}}><button disabled=${!paste.trim()} onClick=${()=>{mode.current='replace';applyImport(paste);setPaste('')}}>Import pasted text</button>${bk&&bk.data&&h`<button onClick=${()=>{if(confirm('Restore the backup from '+new Date(bk.at).toLocaleString()+'?')){backup(S);up(norm(bk.data))}}}>Restore last safety backup</button>`}</div></div>
+ <h2>Storage</h2><div class="card mut"><div>${info.ok?'Saved automatically'+(info.at?' at '+new Date(info.at).toLocaleTimeString():''):'Not saving: storage is full or blocked'}</div><div>${S.entries.length} entries · ${S.habits.length} habits · ${S.notes.length} notes · ${S.mems.length} memories · ${Math.round(JSON.stringify(S).length/1024)} KB</div><div>Kept in this browser’s local storage for this page address. ${pers===true?'Protected from automatic cleanup.':'Clearing site data or switching browsers removes it.'}</div><div>Last backup: ${s.lastExport?new Date(s.lastExport).toLocaleDateString():'never. Export one now.'}</div></div></div>`}
+
+function Search({S,up,setDay,openLog}){
+ const[f,sF]=useState({q:'',ty:'all',st:'all',pr:'any',src:'all',fr:'',to:''}),c=o=>sF({...f,...o}),ql=f.q.trim().toLowerCase(),inR=x=>(!f.fr||x>=f.fr)&&(!f.to||x<=f.to),filt=f.ty!=='all'||f.st!=='all'||f.pr!=='any',any=ql||f.fr||f.to;
+ const rd=(t,v)=>t==='y'?v+'-01-01':t==='m'?v+'-01':v,TAB={d:'day',w:'week',m:'month',y:'year'},RL={d:'Daily',w:'Weekly',m:'Monthly',y:'Yearly'};
+ const es=(f.src==='all'||f.src==='entries')?S.entries.filter(e=>(f.ty==='all'||e.type===f.ty)&&(f.st==='all'||(f.st==='done'?e.done:e.type==='task'&&!e.done))&&(f.pr==='any'||(f.pr==='star'?e.star:e.pri>0))&&inR(e.date)&&(!ql||(e.text+' '+e.date+' '+fmt(e.date,{month:'long',day:'numeric',year:'numeric'})).toLowerCase().includes(ql))).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,80):[];
+ const rv=!filt&&any&&(f.src==='all'||f.src==='reflections')?Object.entries(S.reviews).map(([k,r])=>({k,t:k[0],date:rd(k[0],k.slice(2)),x:Object.values(r).filter(v=>typeof v==='string').join(' ')})).filter(r=>TAB[r.t]&&r.x.trim()&&inR(r.date)&&(!ql||(r.x+' '+r.date).toLowerCase().includes(ql))).slice(0,60):[];
+ const gs=!filt&&any&&(f.src==='all'||f.src==='goals')?S.goals.map(g=>({...g,date:rd(g.scope[0],g.key)})).filter(g=>inR(g.date)&&(!ql||(g.text+' '+g.key).toLowerCase().includes(ql))).slice(0,60):[];
+ const Sel=(k,o)=>h`<select value=${f[k]} onChange=${e=>c({[k]:e.target.value})} style=${{width:'auto',flex:'1 1 120px'}}>${o.map(([v,l])=>h`<option key=${v} value=${v}>${l}</option>`)}</select>`;
+ return h`<div><h1>Search</h1><input value=${f.q} placeholder="Keyword or date, e.g. groceries, November 18" onInput=${e=>c({q:e.target.value})}/>
+  <div class="row" style=${{flexWrap:'wrap',margin:'8px 0'}}>${Sel('ty',[['all','All types'],['task','Tasks'],['event','Events'],['note','Notes']])}${Sel('st',[['all','Any status'],['open','Unfinished'],['done','Completed']])}${Sel('pr',[['any','Any priority'],['pri','Priority'],['star','Important']])}${Sel('src',[['all','Everywhere'],['entries','Entries'],['reflections','Reflections'],['goals','Goals']])}</div>
+  <div class="row"><label class="mut sp">From<input type="date" value=${f.fr} onChange=${e=>c({fr:e.target.value})}/></label><label class="mut sp">To<input type="date" value=${f.to} onChange=${e=>c({to:e.target.value})}/></label><button onClick=${()=>sF({q:'',ty:'all',st:'all',pr:'any',src:'all',fr:'',to:''})}>Clear</button></div>
+  <p class="mut">${es.length+rv.length+gs.length} results</p>
+  ${es.length>0&&h`<div class="card">${es.map(e=>h`<${Entry} key=${e.id} e=${e} up=${up} showDate=${true} go=${setDay}/>`)}</div>`}
+  ${rv.map(r=>h`<div class="card" key=${r.k}><div class="row"><b class="sp">${RL[r.t]} reflection, ${fdt(r.date)}</b><button onClick=${()=>r.t==='d'?setDay(r.date):openLog(TAB[r.t],r.date)}>Open</button></div><div class="mut">${r.x.slice(0,160)}</div></div>`)}
+  ${gs.map(g=>h`<div class="card" key=${g.id}><div class="row"><span class="sp">${g.done?SYM.done:'○'} ${g.text}<div class="mut">${g.scope} goal, ${fdt(g.date)}</div></span><button onClick=${()=>openLog(g.scope,g.date)}>Open</button></div></div>`)}
+  ${!any&&!filt&&h`<div class="mut">Type a keyword or choose a date range or filter.</div>`}</div>`}
+
+function More({go}){const it=[['search','search','Search'],['goals','target','Goals'],['memories','cam','Memories'],['notes','note','Notes'],['reviews','review','Reviews'],['settings','gear','Settings']];
+ return h`<div><h1>More</h1><div class="grid" style=${{gridTemplateColumns:'1fr 1fr',gap:10}}>${it.map(([k,i,l])=>h`<button key=${k} class="card tile" onClick=${()=>go(k)}><${Ic} n=${i} s=${22}/><span>${l}</span></button>`)}</div></div>`}
+
+function App(){const[S,up,info,undo,dismiss]=useStore();const[tab,sT]=useState('today');const[d,setD]=useState(todayS());const[ban,sB]=useState(false);const last=useRef('');
+ const s=S.set;JSTART=s.start||START;SYM=symOf(s);
+ useEffect(()=>{const r=document.documentElement;s.mode==='auto'?r.removeAttribute('data-theme'):r.setAttribute('data-theme',s.mode);const light=s.mode==='light'||(s.mode==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches),ac=(light&&String(s.ac).toLowerCase()==='#e8e4d9')?'#2b2b30':s.ac,mm=/^#([0-9a-f]{6})$/i.exec(ac),lum=mm?(parseInt(mm[1].slice(0,2),16)*.299+parseInt(mm[1].slice(2,4),16)*.587+parseInt(mm[1].slice(4),16)*.114)/255:.3;r.style.setProperty('--ac',ac);r.style.setProperty('--on',lum>.6?'#151517':'#fff');r.style.setProperty('--font',FONTS[s.font]);r.style.setProperty('--r',s.r+'px');r.style.setProperty('--pad',s.pad+'px')},[s]);
+ useEffect(()=>{if(!s.remind)return;const id=setInterval(()=>{const n=new Date(),hm=p2(n.getHours())+':'+p2(n.getMinutes()),k=todayS()+hm;if(hm===s.time&&last.current!==k){last.current=k;sB(true);try{Notification.permission==='granted'&&new Notification('SELF Conscious',{body:'Time to review your day.'})}catch(e){}}},15000);return()=>clearInterval(id)},[s.remind,s.time]);
+ useEffect(()=>{if(!info.undo)return;const t=setTimeout(dismiss,10000);return()=>clearTimeout(t)},[info.undo]);
+ const ltr=useRef('');const go=t=>{ltr.current='';sT(t);document.querySelector('main').scrollTop=0};
+ const openLog=(v,x)=>{setD(x);ltr.current=v;sT('log');document.querySelector('main').scrollTop=0};
+ const setDay=x=>{setD(x);go('today')};
+ const P={S,up,d,setD};
+ const V={today:h`<${Daily} ...${P}/>`,log:h`<${Log} ...${P} setDay=${setDay} lt=${ltr.current}/>`,tasks:h`<${Tasks} S=${S} up=${up} setDay=${setDay}/>`,habits:h`<${Habits} S=${S} up=${up}/>`,more:h`<${More} go=${go}/>`,goals:h`<${GoalsPage} ...${P}/>`,memories:h`<${Memories} ...${P}/>`,notes:h`<${Notes} S=${S} up=${up}/>`,reviews:h`<${ReviewPage} ...${P}/>`,search:h`<${Search} S=${S} up=${up} setDay=${setDay} openLog=${openLog}/>`,settings:h`<${Settings} S=${S} up=${up} info=${info}/>`};
+ const nav=[['today','book','Today'],['log','cal','Calendar'],['tasks','tasks','Tasks'],['habits','flame','Habits'],['more','more','More']];
+ const sub=!nav.some(n=>n[0]===tab);
+ return h`<${React.Fragment}>${(!info.ok||info.note)&&h`<div class="ban"><span class="sp">${info.note||'Changes are not being saved. Export a backup now.'}</span><button onClick=${()=>exportData(S)}>Export</button><button onClick=${dismiss}>OK</button></div>`}${info.undo&&h`<div class="ban" style=${{top:'auto',bottom:'calc(84px + env(safe-area-inset-bottom,0px))'}}><span class="sp">Something was removed.</span><button onClick=${undo}>Undo</button></div>`}${ban&&h`<div class="ban"><span class="sp">Time to journal. How was your day?</span><button onClick=${()=>{sB(false);setDay(todayS())}}>Open</button><button onClick=${()=>sB(false)}>Dismiss</button></div>`}
+ <main>${sub&&h`<button class="g" style=${{margin:'0 0 10px -8px'}} onClick=${()=>go('more')}><${Ic} n="left" s=${18}/> More</button>`}${tab==='today'&&h`<div class="hd"><h1 class="ttl sp">SELF Conscious</h1><button class="ib" onClick=${()=>go('search')} aria-label="Search"><${Ic} n="search" s=${20}/></button><span class=${'chip sv'+(info.ok?'':' r')}>${info.ok?'Saved':'Not saved'}</span></div>`}${V[tab]}</main>
+ <nav>${nav.map(([k,i,l])=>h`<button key=${k} class=${(tab===k||(k==='more'&&sub))?'on':''} onClick=${()=>go(k)}><${Ic} n=${i} s=${22}/><span>${l}</span></button>`)}</nav><//>`}
+ReactDOM.createRoot(document.getElementById('root')).render(h`<${App}/>`);
+</script></body></html>
