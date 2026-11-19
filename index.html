@@ -2,6 +2,8 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0D0D0F">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>SELF Conscious</title>
 <style>
 :root{--bg:#0D0D0F;--card:#161619;--ink:#F4F4F5;--mut:#8C8C94;--ln:rgba(255,255,255,.07);--soft:rgba(255,255,255,.045);--seg:rgba(255,255,255,.1);--ring:rgba(255,255,255,.22);--glass:rgba(13,13,15,.72);--ac:#E8E4D9;--on:#151517;--r:16px;--pad:12px;--font:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -359,4 +361,5 @@ function App(){const[S,up,info,undo,dismiss]=useStore();const[tab,sT]=useState('
  <main>${sub&&h`<button class="g" style=${{margin:'0 0 10px -8px'}} onClick=${()=>go('more')}><${Ic} n="left" s=${18}/> More</button>`}${tab==='today'&&h`<div class="hd"><h1 class="ttl sp">SELF Conscious</h1><button class="ib" onClick=${()=>go('search')} aria-label="Search"><${Ic} n="search" s=${20}/></button><span class=${'chip sv'+(info.ok?'':' r')}>${info.ok?'Saved':'Not saved'}</span></div>`}${V[tab]}</main>
  <nav>${nav.map(([k,i,l])=>h`<button key=${k} class=${(tab===k||(k==='more'&&sub))?'on':''} onClick=${()=>go(k)}><${Ic} n=${i} s=${22}/><span>${l}</span></button>`)}</nav><//>`}
 ReactDOM.createRoot(document.getElementById('root')).render(h`<${App}/>`);
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');
 </script></body></html>
